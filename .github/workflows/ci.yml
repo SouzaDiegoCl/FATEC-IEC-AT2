@@ -51,8 +51,3 @@ jobs:
         with:
           name: app-jar
           path: target/*.jar
-
-      - name: Publicar em GitHub Packages Apache Maven
-        run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
