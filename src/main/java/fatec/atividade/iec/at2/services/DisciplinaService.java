@@ -19,7 +19,11 @@ public class DisciplinaService {
         return  disciplinasRepository.findAll();
     }
 
-    public List<Disciplina> findAll(String id) {
+    public List<Disciplina> findById(String id) {
         return  disciplinasRepository.findById(id);
+    }
+
+    public boolean save(String id, String name) {
+        return  disciplinasRepository.save(id, name);
     }
 }

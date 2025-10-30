@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Repository
@@ -21,7 +22,16 @@ public class DisciplinasRepository {
         return disciplinas.entrySet().stream().map(entry -> new Disciplina(entry.getKey(), entry.getValue())).toList();
     }
 
-    public Optional<Disciplina> findById(String id) {
-        return disciplinas.entrySet().stream().map(entry -> new Disciplina(entry.getKey(), entry.getValue())).toList();
+    public List<Disciplina> findById(String id) {
+        return disciplinas.entrySet().stream().filter(d -> Objects.equals(d.getKey(), id)).map(entry -> new Disciplina(entry.getKey(), entry.getValue())).toList();
+    }
+
+    public boolean save(String id, String nome) {
+        try{
+            disciplinas.put(id, nome);
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 }

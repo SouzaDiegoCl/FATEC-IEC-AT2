@@ -3,6 +3,8 @@ package fatec.atividade.iec.at2.controllers;
 import fatec.atividade.iec.at2.records.Disciplina;
 import fatec.atividade.iec.at2.services.DisciplinaService;
 import jakarta.websocket.server.PathParam;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,16 +20,18 @@ public class DisciplinaController {
     }
 
     @GetMapping
-    public List<Disciplina> listarDisciplinas(){
-        return disciplinaService.findAll();
+    public ResponseEntity<List<Disciplina>> listarDisciplinas(){
+        return ResponseEntity.ok(disciplinaService.findAll());
     }
 
     @GetMapping("/{id}")
-    public void buscarDisciplinaPeloId(@PathVariable("id") String id){
-        return disciplinaService.findById(id);
+    public ResponseEntity<List<Disciplina>> buscarDisciplinaPeloId(@PathVariable("id") String id){
+        return ResponseEntity.ok(disciplinaService.findById(id));
     }
 
     @PostMapping
-    public void adicionarDisciplina(@RequestBody Disciplina dto){
+    public ResponseEntity adicionarDisciplina(@RequestBody Disciplina disciplina){
+        disciplinaService.save(disciplina.id(), disciplina.nome());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }
