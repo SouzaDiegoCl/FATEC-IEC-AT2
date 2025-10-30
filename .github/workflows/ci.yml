@@ -21,6 +21,7 @@ jobs:
     steps:
       - name: Fazer checkout do código
         uses: actions/checkout@v4
+
       - name: Configurar Java 21
         uses: actions/setup-java@v4
         with:
@@ -44,7 +45,6 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          settings-path: ${{ github.workspace }}
 
       - name: Upload JAR para deploy
         uses: actions/upload-artifact@v4
